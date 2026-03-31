@@ -108,8 +108,22 @@
 3. 重新构建插件：`./gradlew buildPlugin`
 4. 在 PhpStorm 中重新安装插件
 
+## GitHub Actions 构建
+
+项目已配置 GitHub Actions 自动构建：
+
+1. **自动构建**：每次推送到 main/master 分支会自动构建
+2. **手动触发**：可以在 GitHub Actions 页面手动运行工作流
+3. **构建产物**：在 Actions 页面下载 `codebuddy-plugin` artifact
+
+### GitHub Actions 配置
+- 使用最新的 actions 版本 (v4)
+- 包含 Gradle 依赖缓存，提高构建速度
+- 自动创建 Release（当打标签时）
+
 ## 注意事项
 
 1. 这是一个基础版插件，主要功能为演示
 2. 实际使用时可能需要根据需求扩展功能
 3. 建议在生产环境前充分测试
+4. GitHub Actions 使用最新的 v4 actions，确保兼容性
