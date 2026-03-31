@@ -2,14 +2,23 @@
 
 ## 提交信息
 ```
-fix: 更新 GitHub Actions 解决弃用版本问题
+fix: 修复 PhpStorm 2021.3.3 API 兼容性问题和构建错误
 
-- 将 actions/checkout@v3 升级到 v4
-- 将 actions/setup-java@v3 升级到 v4  
-- 将 actions/upload-artifact@v3 升级到 v4
-- 更新 Release action 到 ncipollo/release-action@v1
-- 添加 actions/cache@v4 支持 Gradle 依赖缓存
-- 添加 CHANGELOG.md 记录版本变更
+### API 兼容性修复
+- 移除 IntentionPreviewInfo 相关代码（2021.3.3 中不存在）
+- 修复 getCatchType() 类型转换错误
+- 修复 ContentFactory.getInstance() 兼容性问题
+- 添加兼容性包装方法
+
+### 版本更新
+- 更新版本号到 1.0.2
+- 更新 CHANGELOG.md 记录修复
+- 创建 API_COMPATIBILITY_FIXES.md 文档
+
+### 构建优化
+- 简化 GitHub Actions 工作流
+- 移除复杂的 wrapper 初始化
+- 确保 gradlew 脚本完整可用
 ```
 
 ## 变更内容

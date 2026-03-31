@@ -14,8 +14,26 @@ public class CodeBuddyToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         CodeBuddyPanel codeBuddyPanel = new CodeBuddyPanel(project);
-        Content content = ContentFactory.getInstance().createContent(codeBuddyPanel, "", false);
+        // 使用最简单兼容的方法创建 Content
+        Content content = createCompatibleContent(codeBuddyPanel);
         toolWindow.getContentManager().addContent(content);
+    }
+    
+    private Content createCompatibleContent(JComponent component) {
+        try {
+            // 首先尝试直接调用
+            return ContentFactory.getInstance().createContent(component, "", false);
+        } catch (Exception e) {
+            try {
+                // 如果失败，尝试使用反射
+                Class<?> contentFactoryClass = Class.forName("com.intellij.ui.content.ContentFactory");
+                Object factory = contentFactoryClass.getMethod("getInstance").invoke(null);
+                return (Content) contentFactoryClass.getMethod("createContent", JComponent.class, String.class, boolean.class)
+                    .invoke(factory, component, "", false);
+            } catch (Exception ex) {
+                throw new RuntimeException("Cannot create content for CodeBuddy panel", ex);
+            }
+        }
     }
 
     @Override

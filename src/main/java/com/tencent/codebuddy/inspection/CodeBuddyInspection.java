@@ -37,8 +37,14 @@ public class CodeBuddyInspection extends AbstractBaseJavaLocalInspectionTool {
             public void visitCatchSection(PsiCatchSection catchSection) {
                 super.visitCatchSection(catchSection);
                 
-                PsiTypeElement caughtType = catchSection.getCatchType();
-                if (caughtType != null && caughtType.getText().equals("Exception")) {
+                // 在旧版本中，getCatchType() 可能返回 PsiType 而不是 PsiTypeElement
+                // 我们直接检查文本内容
+                PsiElement catchTypeElement = catchSection.getFirstChild();
+                while (catchTypeElement != null && !(catchTypeElement instanceof PsiTypeElement)) {
+                    catchTypeElement = catchTypeElement.getNextSibling();
+                }
+                
+                if (catchTypeElement != null && catchTypeElement.getText().equals("Exception")) {
                     holder.registerProblem(catchSection,
                         "Avoid catching generic Exception. Catch specific exceptions instead.",
                         ProblemHighlightType.WEAK_WARNING);

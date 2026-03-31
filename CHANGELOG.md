@@ -1,6 +1,15 @@
 # Changelog
 
-## [1.0.1] - 2026-03-31
+## [1.0.2] - 2026-03-31
+
+### Fixed
+- **API 兼容性**: 修复 PhpStorm 2021.3.3 API 兼容性问题
+  - 移除 `IntentionPreviewInfo` 相关代码（2021.3.3 中不存在）
+  - 修复 `getCatchType()` 类型转换错误
+  - 修复 `ContentFactory.getInstance()` 兼容性问题
+  - 简化 GitHub Actions 工作流，移除复杂的 wrapper 初始化
+
+### [1.0.1] - 2026-03-31
 
 ### Fixed
 - **GitHub Actions**: 修复弃用的 actions 版本问题

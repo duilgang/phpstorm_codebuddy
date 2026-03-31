@@ -1,7 +1,6 @@
 package com.tencent.codebuddy.intentions;
 
 import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.codeInsight.intention.preview.IntentionPreviewInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -74,12 +73,6 @@ public class CodeBuddyRefactorIntention implements IntentionAction {
     @Override
     public boolean startInWriteAction() {
         return false;
-    }
-
-    @NotNull
-    @Override
-    public IntentionPreviewInfo generatePreview(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-        return IntentionPreviewInfo.EMPTY;
     }
 
     private String applyRefactoring(String code, String operation) {

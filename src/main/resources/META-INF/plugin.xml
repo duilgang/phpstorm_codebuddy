@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.tencent.codebuddy.local</id>
     <name>CodeBuddy Local (Tencent Cloud Code Assistant)</name>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <vendor email="support@tencent.com" url="https://cloud.tencent.com">Tencent Cloud</vendor>
 
     <description><![CDATA[
