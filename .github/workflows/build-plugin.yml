@@ -30,42 +30,7 @@ jobs:
         gradle-home-cache-cleanup: true
         
     - name: Build with Gradle 7.4
-      run: |
-        # 清理所有可能的 Gradle 缓存
-        rm -rf ~/.gradle/caches/ || true
-        rm -rf ~/.gradle/wrapper/ || true
-        rm -rf ~/.gradle/daemon/ || true
-        
-        echo "Gradle 缓存已清理，开始构建..."
-        
-        # 构建插件，最多重试2次
-        max_retries=2
-        retry_count=0
-        
-        while [ $retry_count -lt $max_retries ]; do
-          echo "构建尝试 #$((retry_count + 1))"
-          
-          # 只构建插件，跳过测试
-          if gradle buildPlugin --stacktrace --no-daemon --info --rerun-tasks --offline; then
-            echo "构建成功！"
-            break
-          else
-            echo "离线构建失败，尝试在线构建..."
-            if gradle buildPlugin --stacktrace --no-daemon --info --rerun-tasks; then
-              echo "在线构建成功！"
-              break
-            else
-              retry_count=$((retry_count + 1))
-              if [ $retry_count -lt $max_retries ]; then
-                echo "构建失败，等待15秒后重试..."
-                sleep 15
-              else
-                echo "构建失败，已达最大重试次数"
-                exit 1
-              fi
-            fi
-          fi
-        done
+      run: gradle buildPlugin --stacktrace --no-daemon --info
       
     - name: Upload plugin artifact
       uses: actions/upload-artifact@v4

@@ -21,17 +21,23 @@ public class CodeBuddyToolWindowFactory implements ToolWindowFactory {
     
     private Content createCompatibleContent(JComponent component) {
         try {
-            // 首先尝试直接调用
-            return ContentFactory.getInstance().createContent(component, "", false);
+            // 对于 IntelliJ 2021.3.3，使用 ContentFactory.SERVICE.getInstance()
+            return ContentFactory.SERVICE.getInstance().createContent(component, "", false);
         } catch (Exception e) {
             try {
-                // 如果失败，尝试使用反射
-                Class<?> contentFactoryClass = Class.forName("com.intellij.ui.content.ContentFactory");
-                Object factory = contentFactoryClass.getMethod("getInstance").invoke(null);
-                return (Content) contentFactoryClass.getMethod("createContent", JComponent.class, String.class, boolean.class)
-                    .invoke(factory, component, "", false);
+                // 如果失败，尝试使用旧的 ServiceManager 方法
+                ContentFactory contentFactory = com.intellij.openapi.components.ServiceManager.getService(ContentFactory.class);
+                return contentFactory.createContent(component, "", false);
             } catch (Exception ex) {
-                throw new RuntimeException("Cannot create content for CodeBuddy panel", ex);
+                try {
+                    // 如果还失败，尝试使用反射作为最后手段
+                    Class<?> contentFactoryClass = Class.forName("com.intellij.ui.content.ContentFactory");
+                    Object factory = contentFactoryClass.getMethod("getInstance").invoke(null);
+                    return (Content) contentFactoryClass.getMethod("createContent", JComponent.class, String.class, boolean.class)
+                        .invoke(factory, component, "", false);
+                } catch (Exception exc) {
+                    throw new RuntimeException("Cannot create content for CodeBuddy panel", exc);
+                }
             }
         }
     }
