@@ -1,6 +1,15 @@
 # Changelog
 
-## [1.0.3] - 2026-04-01
+## [1.0.4] - 2026-04-01
+
+### Fixed
+- **Gradle 版本**: 修复 Gradle 9.4.1 与 JDK 11 的兼容性问题
+  - 指定使用 Gradle 7.4（与项目配置一致）
+  - 解决 "Gradle requires JVM 17 or later to run" 错误
+  - 确保 GitHub Actions 使用正确的 Gradle 版本
+  - 保持构建环境一致性
+
+### [1.0.3] - 2026-04-01
 
 ### Fixed
 - **Gradle 构建**: 修复 GitHub Actions 中的 Gradle wrapper 问题

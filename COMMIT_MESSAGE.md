@@ -2,23 +2,23 @@
 
 ## 提交信息
 ```
-fix: 修复 GitHub Actions 中的 Gradle 构建错误
+fix: 修复 Gradle 9.4.1 与 JDK 11 的兼容性问题
 
-### Gradle 构建修复
-- 解决 "Could not find or load main class" Java 路径错误
-- 简化 gradlew 脚本，移除复杂的路径处理逻辑
-- 更新 GitHub Actions 直接使用 gradle 命令
-- 使用 gradle/gradle-build-action@v3 确保环境正确
+### Gradle 版本兼容性修复
+- 指定使用 Gradle 7.4（与项目配置一致）
+- 解决 "Gradle requires JVM 17 or later to run" 错误
+- 确保 GitHub Actions 使用正确的 Gradle 版本
+- 保持构建环境一致性
 
 ### 版本更新
-- 更新版本号到 1.0.3
+- 更新版本号到 1.0.4
 - 更新 CHANGELOG.md 记录修复
-- 创建 GRADLE_FIX.md 文档说明解决方案
+- 创建 GRADLE_VERSION_FIX.md 文档
 
 ### 构建优化
-- 直接使用 gradle 命令避免 wrapper 问题
-- 保持 --stacktrace 和 --no-daemon 参数
-- 确保构建过程稳定可靠
+- 使用 gradle/gradle-build-action@v3 管理 Gradle 环境
+- 明确指定 gradle-version: '7.4'
+- 直接使用 gradle 命令确保版本正确
 ```
 
 ## 变更内容
