@@ -2,23 +2,23 @@
 
 ## 提交信息
 ```
-fix: 修复 PhpStorm 2021.3.3 API 兼容性问题和构建错误
+fix: 修复 GitHub Actions 中的 Gradle 构建错误
 
-### API 兼容性修复
-- 移除 IntentionPreviewInfo 相关代码（2021.3.3 中不存在）
-- 修复 getCatchType() 类型转换错误
-- 修复 ContentFactory.getInstance() 兼容性问题
-- 添加兼容性包装方法
+### Gradle 构建修复
+- 解决 "Could not find or load main class" Java 路径错误
+- 简化 gradlew 脚本，移除复杂的路径处理逻辑
+- 更新 GitHub Actions 直接使用 gradle 命令
+- 使用 gradle/gradle-build-action@v3 确保环境正确
 
 ### 版本更新
-- 更新版本号到 1.0.2
+- 更新版本号到 1.0.3
 - 更新 CHANGELOG.md 记录修复
-- 创建 API_COMPATIBILITY_FIXES.md 文档
+- 创建 GRADLE_FIX.md 文档说明解决方案
 
 ### 构建优化
-- 简化 GitHub Actions 工作流
-- 移除复杂的 wrapper 初始化
-- 确保 gradlew 脚本完整可用
+- 直接使用 gradle 命令避免 wrapper 问题
+- 保持 --stacktrace 和 --no-daemon 参数
+- 确保构建过程稳定可靠
 ```
 
 ## 变更内容

@@ -1,6 +1,15 @@
 # Changelog
 
-## [1.0.2] - 2026-03-31
+## [1.0.3] - 2026-04-01
+
+### Fixed
+- **Gradle 构建**: 修复 GitHub Actions 中的 Gradle wrapper 问题
+  - 解决 `Could not find or load main class` Java 路径错误
+  - 简化 `gradlew` 脚本，移除复杂的路径处理
+  - 更新 GitHub Actions 直接使用 `gradle` 命令
+  - 使用 `gradle/gradle-build-action@v3` 确保环境正确
+
+### [1.0.2] - 2026-03-31
 
 ### Fixed
 - **API 兼容性**: 修复 PhpStorm 2021.3.3 API 兼容性问题
