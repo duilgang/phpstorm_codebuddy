@@ -21,10 +21,12 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         
-    - name: Setup Gradle
+    - name: Setup Gradle 7.4
       uses: gradle/gradle-build-action@v3
-      
-    - name: Build with Gradle
+      with:
+        gradle-version: '7.4'
+        
+    - name: Build with Gradle 7.4
       run: gradle buildPlugin --stacktrace --no-daemon
       
     - name: Upload plugin artifact
